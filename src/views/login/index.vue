@@ -1,48 +1,141 @@
 <template>
   <div class="login-container">
+    <div class="title-container">
+      <h2 class="title m20">山东财经大学</h2>
+      <h3 class="title m40">信管专业咨询系统</h3>
+    </div>
+
+    <!-- 登录板块 -->
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
+      <div v-show="!isRegister">
+        <!-- 用户名 -->
+        <el-form-item prop="username">
+          <span class="svg-container">
+            <svg-icon icon-class="user" />
+          </span>
+          <el-input
+            ref="username"
+            v-model="loginForm.username"
+            placeholder="学号/工号"
+            name="username"
+            type="text"
+          />
+        </el-form-item>
 
-      <div class="title-container">
-        <h2 class="title m20">山东财经大学</h2>
-        <h3 class="title m40">信管专业咨询系统</h3>
+        <!-- 密码 -->
+        <el-form-item prop="password">
+          <span class="svg-container">
+            <svg-icon icon-class="password" />
+          </span>
+          <el-input
+            :key="passwordType"
+            ref="password"
+            v-model="loginForm.password"
+            :type="passwordType"
+            placeholder="密码"
+            name="password"
+            @keyup.enter.native="handleLogin"
+          />
+          <span class="show-pwd" @click="showPwd">
+            <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+          </span>
+        </el-form-item>
+        <!-- 身份 -->
+        <el-form-item prop="identity">
+          <el-radio-group class="btns" v-model="loginForm.identity">
+            <el-radio label="学生"></el-radio>
+            <el-radio label="管理员"></el-radio>
+          </el-radio-group>
+        </el-form-item>
+
+        <div class="btns">
+          <el-button :loading="loading" type="primary" style="width:35%;" @click.native.prevent="handleLogin">登录</el-button>
+          <el-button :loading="loading" type="primary" style="width:35%" @click.native.prevent="toRegister">注册</el-button>
+        </div>
       </div>
+    </el-form>
 
-      <el-form-item prop="username">
-        <span class="svg-container">
-          <svg-icon icon-class="user" />
-        </span>
-        <el-input
-          ref="username"
-          v-model="loginForm.username"
-          placeholder="Username"
-          name="username"
-          type="text"
-          tabindex="1"
-          auto-complete="on"
-        />
-      </el-form-item>
+    <!-- 注册板块 -->
+    <el-form ref="loginForm" :model="registerForm" :rules="registerRules" class="login-form" auto-complete="on" label-position="left">
+      <div v-show="isRegister">
+        <!-- 姓名 -->
+        <el-form-item prop="username">
+          <span class="svg-container">
+            <svg-icon icon-class="form" />
+          </span>
+          <el-input
+            ref="username"
+            v-model="registerForm.username"
+            placeholder="姓名"
+            name="username"
+            type="text"
+          />
+        </el-form-item>
+        <!-- 学号 -->
+        <el-form-item prop="userId">
+          <span class="svg-container">
+            <svg-icon icon-class="user" />
+          </span>
+          <el-input
+            ref="userId"
+            v-model="registerForm.userId"
+            placeholder="学号/工号"
+            name="学号"
+            type="text"
+          />
+        </el-form-item>
+        <!-- 手机号 -->
+        <el-form-item prop="phone">
+          <span class="svg-container">
+            <svg-icon icon-class="table" />
+          </span>
+          <el-input
+            ref="phone"
+            v-model="registerForm.phone"
+            placeholder="手机号"
+            name="phone"
+            type="text"
+          />
+        </el-form-item>
+        <!-- 密码 -->
+        <el-form-item prop="password">
+          <span class="svg-container">
+            <svg-icon icon-class="password" />
+          </span>
+          <el-input
+            :key="passwordType"
+            ref="password"
+            v-model="registerForm.password"
+            :type="passwordType"
+            placeholder="密码"
+            name="password"
+            @keyup.enter.native="handleRegister"
+          />
+          <span class="show-pwd" @click="showPwd">
+            <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+          </span>
+        </el-form-item>
+        <!-- 确认密码 -->
+        <el-form-item prop="repeatPassword">
+          <span class="svg-container">
+            <svg-icon icon-class="password" />
+          </span>
+          <el-input
+            :key="passwordType"
+            ref="repeatPassword"
+            v-model="registerForm.repeatPassword"
+            :type="passwordType"
+            placeholder="确认密码"
+            name="repeatPassword"
+          />
+        </el-form-item>
+        <!-- 图形验证码-待做 -->
 
-      <el-form-item prop="password">
-        <span class="svg-container">
-          <svg-icon icon-class="password" />
-        </span>
-        <el-input
-          :key="passwordType"
-          ref="password"
-          v-model="loginForm.password"
-          :type="passwordType"
-          placeholder="Password"
-          name="password"
-          tabindex="2"
-          auto-complete="on"
-          @keyup.enter.native="handleLogin"
-        />
-        <span class="show-pwd" @click="showPwd">
-          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
-        </span>
-      </el-form-item>
-
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
+        <div class="btns">
+          <el-button :loading="loading" type="primary" style="width:35%;" @click.native.prevent="handleRegister">注册</el-button>
+          <el-button :loading="loading" type="text" style="width:35%" @click.native.prevent="toLogin">取消</el-button>
+        </div>
+      </div>
 
       <div class="tips">
         <span style="margin-right:20px;">username: admin</span>
@@ -54,37 +147,88 @@
 </template>
 
 <script>
-import { validUsername } from '@/utils/validate'
+import { validUserId, validatePhoneNumber } from '@/utils/validate'
 
 export default {
   name: 'Login',
   data() {
-    const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
+    const validateUserId = (rule, value, callback) => {
+      if (!validUserId(value)) {
+        callback(new Error('请输入正确的学号或工号'))
       } else {
         callback()
       }
     }
     const validatePassword = (rule, value, callback) => {
+      let isChinese = false
+      for (let i = 0; i < value.length; i++) {
+        const char = value.charCodeAt(i)
+        if (char < 0 || char > 255 || char === 32) {
+          isChinese = true;
+        }
+      }
       if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
+        callback(new Error('密码不能少于6位'))
+      }else if (isChinese) {
+        callback(new Error('密码中不要包含汉字和空格'));
+      } else{
+        callback()
+      }
+    }
+    const checkPassword = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请再次输入密码'));
+      } else if (value !== this.registerForm.password) {
+        callback(new Error('两次输入密码不一致!'));
+      } else {
+        callback();
+      }
+    }
+    const phoneValidate = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入手机号'));
+      } else if (!validatePhoneNumber(value)) {
+        callback(new Error('请输入合法手机号！'));
+      } else {
+        callback();
+      }
+    }
+    const validateIdentify = (rule, value, callback) => {
+      if(value == '') {
+        callback(new Error('请选择身份'))
       } else {
         callback()
       }
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111'
+        userId: '20160616300',
+        password: '111111',
+        identity: ''
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        userId: [{ required: true, trigger: 'blur', userId: validateUserId }],
+        password: [{ required: true, trigger: 'blur', validator: validatePassword }],
+        identity: [{ required: true, validator: validateIdentify, trigger: 'change' }],
+      },
+      registerForm: {
+        username: 'admin',
+        userId: '',
+        phone: '',
+        password: '',
+        repeatPassword: ''
+      },
+      registerRules: {
+        username: [{ required: true, trigger: 'change' }],
+        userId: [{ required: true, trigger: 'change', validator: validateUserId }],
+        phone: [{ required: true, trigger: 'change', validator: phoneValidate }],
+        password: [{ required: true, trigger: 'change', validator: validatePassword }],
+        repeatPassword: [{ required: true, trigger: 'change', validator: checkPassword }]
       },
       loading: false,
       passwordType: 'password',
-      redirect: undefined
+      redirect: undefined,
+      isRegister: false
     }
   },
   watch: {
@@ -121,6 +265,12 @@ export default {
           return false
         }
       })
+    },
+    toRegister() {
+      this.isRegister = true
+    },
+    toLogin() {
+      this.isRegister = false
     }
   }
 }
@@ -188,7 +338,7 @@ $light_gray:#eee;
     position: relative;
     width: 520px;
     max-width: 100%;
-    padding: 160px 35px 0;
+    padding: 60px 35px 0;
     margin: 0 auto;
     overflow: hidden;
   }
@@ -240,5 +390,10 @@ $light_gray:#eee;
 }
 .m40{
   margin-bottom: 40px;
+}
+.btns{
+  display:flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 </style>

@@ -18,3 +18,13 @@ export function validUsername(str) {
   const valid_map = ['admin', 'editor']
   return valid_map.indexOf(str.trim()) >= 0
 }
+
+export function validatePhoneNumber(phone) {
+  const reg = /^1[123456789]\d{9}$/
+  return reg.test(phone)
+}
+
+export function validUserId(userId) {
+  const validate_serId = /^1[123456789]\d{9}$/
+  return validate_serId.test(userId)
+}
