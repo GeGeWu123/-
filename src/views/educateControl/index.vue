@@ -55,14 +55,12 @@ export default {
     }
   },
   created() {
-    console.log('创建start')
     this.handleEducatePlan()
   },
   methods: {
     handleEducatePlan() {
-      console.log('方法start')
       getEducatePlan().then(res => {
-        console.log(res, '有没有res')
+        console.log(res,'getEducatePlan-res')
       })
     }
   }

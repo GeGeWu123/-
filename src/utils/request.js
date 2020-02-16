@@ -44,10 +44,12 @@ service.interceptors.response.use(
    * You can also judge the status by HTTP Status Code
    */
   response => {
+    // 拿到返回值进一步处理
     const res = response.data
+    console.log(res.code, 'res.code')
 
     // if the custom code is not 20000, it is judged as an error.
-    if (res.code !== 20000) {
+    if (res.code !== 20000 && res.code !== 1) {
       Message({
         message: res.message || 'Error',
         type: 'error',
@@ -67,7 +69,7 @@ service.interceptors.response.use(
           })
         })
       }
-      return Promise.reject(new Error(res.message || 'Error'))
+      // return Promise.reject(new Error(res.message || 'Error'))
     } else {
       return res
     }
