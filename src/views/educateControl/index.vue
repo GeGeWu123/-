@@ -47,8 +47,25 @@
 </template>
 
 <script>
-export default {
+import { getEducatePlan } from '@/api/educatePlan'
 
+export default {
+  data() {
+    return {
+    }
+  },
+  methods: {
+    handleEducatePlan() {
+      console.log('方法start');
+      getEducatePlan().then(res => {
+        console.log(res, '有没有res');
+      })
+    }
+  },
+  created() {
+    console.log('创建start');
+    this.handleEducatePlan()
+  }
 }
 </script>
 
