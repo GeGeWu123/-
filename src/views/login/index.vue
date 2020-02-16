@@ -1,12 +1,11 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
-
-      <div class="title-container">
-        <h2 class="title m20">山东财经大学</h2>
-        <h3 class="title m40">信管专业咨询系统</h3>
-      </div>
-
+    <div class="title-container">
+      <h2 class="title m20">山东财经大学</h2>
+      <h3 class="title m40">信管专业咨询系统</h3>
+    </div>
+    <!-- 登录板块 -->
+    <el-form v-show="!isRegister" ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
       <el-form-item prop="username">
         <span class="svg-container">
           <svg-icon icon-class="user" />
@@ -42,14 +41,99 @@
         </span>
       </el-form-item>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
-
-      <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: any</span>
+      <div class="btns">
+        <el-button :loading="loading" type="primary" style="width:35%;" @click.native.prevent="handleLogin">登录</el-button>
+        <el-button :loading="loading" type="primary" style="width:35%" @click.native.prevent="toRegister">注册</el-button>
       </div>
-
     </el-form>
+
+    <!-- 注册板块 -->
+    <el-form v-show="isRegister" ref="registerForm" :model="registerForm" class="login-form" auto-complete="on" label-position="left">
+      <el-form-item prop="username">
+        <span class="svg-container">
+          <svg-icon icon-class="user" />
+        </span>
+        <el-input
+          ref="username"
+          v-model="loginForm.username"
+          placeholder="Username"
+          name="username"
+          type="text"
+          tabindex="1"
+          auto-complete="on"
+        />
+      </el-form-item>
+
+      <!-- 学号 -->
+      <el-form-item prop="userId">
+        <span class="svg-container">
+          <svg-icon icon-class="user" />
+        </span>
+        <el-input
+          ref="userId"
+          v-model="registerForm.userId"
+          placeholder="学号/工号"
+          name="学号"
+          type="text"
+        />
+      </el-form-item>
+
+      <!-- 手机号 -->
+      <el-form-item prop="phone">
+        <span class="svg-container">
+          <svg-icon icon-class="table" />
+        </span>
+        <el-input
+          ref="phone"
+          v-model="registerForm.phone"
+          placeholder="手机号"
+          name="phone"
+          type="text"
+        />
+      </el-form-item>
+
+      <el-form-item prop="password">
+        <span class="svg-container">
+          <svg-icon icon-class="password" />
+        </span>
+        <el-input
+          :key="passwordType"
+          ref="password"
+          v-model="loginForm.password"
+          :type="passwordType"
+          placeholder="Password"
+          name="password"
+          tabindex="2"
+          auto-complete="on"
+          @keyup.enter.native="handleLogin"
+        />
+        <span class="show-pwd" @click="showPwd">
+          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+        </span>
+      </el-form-item>
+
+      <!-- 确认密码 -->
+      <el-form-item prop="repeatPassword">
+        <span class="svg-container">
+          <svg-icon icon-class="password" />
+        </span>
+        <el-input
+          :key="passwordType"
+          ref="repeatPassword"
+          v-model="registerForm.repeatPassword"
+          :type="passwordType"
+          placeholder="确认密码"
+          name="repeatPassword"
+        />
+      </el-form-item>
+
+      <div class="btns">
+        <el-button :loading="loading" type="primary" style="width:35%" @click.native.prevent="handleRegister">注册</el-button>
+        <el-button :loading="loading" type="text" style="width:35%" @click.native.prevent="toLogin">取消</el-button>
+
+      </div>
+    </el-form>
+
   </div>
 </template>
 
@@ -82,6 +166,14 @@ export default {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
+      registerForm: {
+        username: '',
+        userId: '',
+        phone: '',
+        password: '',
+        repeatPassword: ''
+      },
+      isRegister: false,
       loading: false,
       passwordType: 'password',
       redirect: undefined
@@ -121,7 +213,17 @@ export default {
           return false
         }
       })
+    },
+    handleRegister() {
+      console.log(this.registerForm)
+    },
+    toRegister() {
+      this.isRegister = true
+    },
+    toLogin() {
+      this.isRegister = false
     }
+
   }
 }
 </script>
@@ -188,7 +290,7 @@ $light_gray:#eee;
     position: relative;
     width: 520px;
     max-width: 100%;
-    padding: 160px 35px 0;
+    padding: 60px 35px 0;
     margin: 0 auto;
     overflow: hidden;
   }
@@ -240,5 +342,10 @@ $light_gray:#eee;
 }
 .m40{
   margin-bottom: 40px;
+}
+.btns{
+  display:flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 </style>

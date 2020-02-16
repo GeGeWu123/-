@@ -54,17 +54,17 @@ export default {
     return {
     }
   },
+  created() {
+    console.log('创建start')
+    this.handleEducatePlan()
+  },
   methods: {
     handleEducatePlan() {
-      console.log('方法start');
+      console.log('方法start')
       getEducatePlan().then(res => {
-        console.log(res, '有没有res');
+        console.log(res, '有没有res')
       })
     }
-  },
-  created() {
-    console.log('创建start');
-    this.handleEducatePlan()
   }
 }
 </script>
