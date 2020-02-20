@@ -16,16 +16,7 @@
       <span class="subtitle">{{educatePlan.educationalSystem}}</span>
       <p>&nbsp;&nbsp;&nbsp;&nbsp;{{educatePlan.educationalSystemDetail}}</p>
       <span class="subtitle">{{educatePlan.creditRequirment}}</span>
-      <pre>
-    本专业要求学生修满指导性教学计划中规定的课程总学分160学分和各模块应修学分，方准毕业，其中：
-
-1．通识课程55学分，占总学分的34.38%，其中，通识必修课37学分，选修课18学分，需修满每个模块要求的最低学分。
-
-2．学科基础课程42学分，占总学分的26.25%。
-
-3．专业课程45学分，占总学分的28.12%，其中，专业必修课22学分，专业选修课需修读23学分。
-
-4．独立设置的实践教学环节18学分，占总学分的11.25%。</pre>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;{{educatePlan.creditRequirementDetail}}</p>
       <span class="subtitle">{{educatePlan.conferDegree}}</span>
       <p>&nbsp;&nbsp;&nbsp;&nbsp;{{educatePlan.conferDegreeIntroduce}}</p>
     </div>
@@ -42,6 +33,7 @@ export default {
     }
   },
   created() {
+    console.log(this.$route.query.grade, '传参grade');
     this.handleEducatePlan()
   },
   methods: {

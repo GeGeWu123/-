@@ -1,5 +1,11 @@
 <template>
   <div class="login-container">
+    <div class="link">
+      <span class="svg-container">
+        <svg-icon icon-class="link" />
+      </span>
+      <a href="http://localhost:9529/#/login?redirect=%2FeducatePlan%2FeducatePlan">&nbsp;&nbsp;管理员登录</a>
+    </div>
     <div class="title-container">
       <h2 class="title m20">山东财经大学</h2>
       <h3 class="title m40">信管专业咨询系统</h3>
@@ -244,6 +250,12 @@ $cursor: #fff;
 
 /* reset element-ui css */
 .login-container {
+  .link{
+    position: absolute;
+    color:cadetblue;
+    right: 30px;
+    top: 30px;
+  }
   .el-input {
     display: inline-block;
     height: 47px;
@@ -338,6 +350,7 @@ $light_gray:#eee;
   }
 }
 .m20{
+  margin-top: 85px;
   margin-bottom: 20px;
 }
 .m40{

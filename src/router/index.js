@@ -60,7 +60,7 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/courseSystem/oneSix',
     name: 'CourseSystem',
-    meta: { title: '课程体系', icon: 'example' },
+    meta: { title: '课程体系（待）', icon: 'example' },
     children: [
       {
         path: 'oneSix',
@@ -78,15 +78,30 @@ export const constantRoutes = [
   },
 
   {
-    path: '/educateControl',
+    path: '/educatePlan',
     component: Layout,
-    redirect: '/educateControl',
-    children: [{
-      path: 'educateControl',
-      name: 'EducateControl',
-      component: () => import('@/views/educateControl/index'),
-      meta: { title: '培养方案', icon: 'form' }
-    }]
+    redirect: '/educatePlan',
+    children: [
+      {
+        path: 'educatePlan',
+        name: 'EducatePlan',
+        component: () => import('@/views/educatePlan/index'),
+        meta: { title: '培养方案', icon: 'tree' }
+      }
+    ]
+  },
+  {
+    path: '/educatePlan',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'educatePlanDetail',
+        name: 'educatePlanDetail',
+        component: () => import('@/views/educatePlan/educatePlanDetail'),
+        meta: { title: '培养方案详情', icon: 'form' }
+      }
+    ]
   },
 
   {
