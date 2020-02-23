@@ -1,10 +1,18 @@
 import request from '@/utils/request'
 
-export function getEducatePlan(data) {
+export function initTrainProgram(params) {
   return request({
     url: '/trainProgram/page/init',
     method: 'get',
-    data
+    params
+  })
+}
+
+export function findTrainProgramById(params) {
+  return request({
+    url: '/trainProgram/findById' + '?id=' + params,
+    method: 'get',
+    params
   })
 }
 

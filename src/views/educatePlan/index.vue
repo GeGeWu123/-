@@ -1,12 +1,17 @@
 <template>
   <div class="table">
     <el-table
-      :data="tableData"
+      :data="planData"
       border
       style="width: 100%">
       <el-table-column
         prop="grade"
         label="年级"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="updateTime"
+        label="更新时间"
         width="180">
       </el-table-column>
       <el-table-column label="操作">
@@ -21,28 +26,26 @@
 </template>
 
 <script>
+import { initTrainProgram } from '@/api/educatePlan'
 export default {
   data() {
     return {
-      tableData: [{
-        grade: '一六级',
-      }, {
-        grade: '一七级',
-      }, {
-        grade: '一八级',
-      }, {
-        grade: '一九级',
-      }]
+      planData: []
     }
   },
-  created() {
+  mounted() {
+    this.getPlan();
   },
   methods: {
+    getPlan() {
+      initTrainProgram().then(res => {
+        this.planData = res.data;
+      })
+    },
     handleQuery(index, row) {
       console.log(index, row, 'index+row');
-      var grade = row;
-          // this.$router.push({path: '/versions/versionadd',query:{id:id,name:name,url:url}});
-      this.$router.push({path: '/educatePlan/educatePlanDetail', query: {grade: grade}});
+      var keyId = row.keyId;
+      this.$router.push({path: '/educatePlan/educatePlanDetail', query: {keyId: keyId}});
     }
   }
 }
@@ -51,6 +54,5 @@ export default {
 <style lang="scss">
 .table{
     margin: 111px 300px;
-    width: 373px;
 }
 </style>

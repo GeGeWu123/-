@@ -87,17 +87,11 @@ export const constantRoutes = [
         name: 'EducatePlan',
         component: () => import('@/views/educatePlan/index'),
         meta: { title: '培养方案', icon: 'tree' }
-      }
-    ]
-  },
-  {
-    path: '/educatePlan',
-    component: Layout,
-    hidden: true,
-    children: [
+      },
       {
         path: 'educatePlanDetail',
-        name: 'educatePlanDetail',
+        name: 'EducatePlanDetail',
+        hidden: true,
         component: () => import('@/views/educatePlan/educatePlanDetail'),
         meta: { title: '培养方案详情', icon: 'form' }
       }
