@@ -45,7 +45,7 @@ export const constantRoutes = [
 
   {
     path: '/',
-    redirect: '/video/video'
+    redirect: '/video/myvideo'
   },
 
   {
@@ -53,7 +53,7 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/video',
     children: [{
-      path: 'video',
+      path: 'myvideo',
       name: 'Video',
       component: () => import('@/views/video/index'),
       meta: { title: '导学视频', icon: 'dashboard' }
@@ -128,14 +128,14 @@ export const constantRoutes = [
   },
 
   {
-    path: '/employment',
+    path: '/customerService',
     component: Layout,
-    redirect: '/employment',
+    redirect: '/customerService',
     children: [{
-      path: 'employment',
-      name: 'Employment',
-      component: () => import('@/views/employment/index'),
-      meta: { title: '就业前景', icon: 'table' }
+      path: 'customerService',
+      name: 'CustomerService',
+      component: () => import('@/views/customerService/index'),
+      meta: { title: '智能客服', icon: 'user' }
     }]
   },
 
