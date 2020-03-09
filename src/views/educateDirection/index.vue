@@ -4,7 +4,7 @@
       <el-card class="box-card">
         <div slot="header" class="clearfix">
           <span>{{item.name}}</span>
-          <el-button style="float: right; padding: 3px 0" type="text">查看详情</el-button>
+          <el-button style="float: right; padding: 3px 0" type="text" @click="viewDetail(item.train_direction_id)">查看详情</el-button>
         </div>
         <div class="text item">
           {{item.describe}}
@@ -21,17 +21,25 @@ export default {
       list: [
         {
           name: '信息系统开发方向',
-          describe: '“信息系统开发”方向侧重培养学生利用信息系统解决管理中的实际问题以及信息系统开发建设的能力。'
+          describe: '“信息系统开发”方向侧重培养学生利用信息系统解决管理中的实际问题以及信息系统开发建设的能力。',
+          train_direction_id: 0
         },
         {
           name: '企业信息化方向',
-          describe: '“企业信息化”方向侧重培养学生的组织信息系统战略规划、分析与设计和组织信息化管理咨询等方面能力。'
+          describe: '“企业信息化”方向侧重培养学生的组织信息系统战略规划、分析与设计和组织信息化管理咨询等方面能力。',
+          train_direction_id: 1
         },
         {
           name: '财经大数据分析方向',
-          describe: '“财经大数据分析”方向侧重培养学生的财经大数据采集、存储处理以及分析利用能力。'
+          describe: '“财经大数据分析”方向侧重培养学生的财经大数据采集、存储处理以及分析利用能力。',
+          train_direction_id: 2
         }
       ]
+    }
+  },
+  methods: {
+    viewDetail(train_direction_id) {
+      this.$router.push({ path: '/educateDirection/directionOverview', query: { train_direction_id: train_direction_id }})
     }
   }
 }

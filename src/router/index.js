@@ -56,7 +56,7 @@ export const constantRoutes = [
       path: 'myvideo',
       name: 'Video',
       component: () => import('@/views/video/index'),
-      meta: { title: '导学视频', icon: 'dashboard' }
+      meta: { title: '导学视频', icon: 'guide' }
     }]
   },
 
@@ -91,14 +91,14 @@ export const constantRoutes = [
         path: 'educatePlan',
         name: 'EducatePlan',
         component: () => import('@/views/educatePlan/index'),
-        meta: { title: '培养方案', icon: 'tree' }
+        meta: { title: '培养方案', icon: 'form' }
       },
       {
         path: 'educatePlanDetail',
         name: 'EducatePlanDetail',
         hidden: true,
         component: () => import('@/views/educatePlan/educatePlanDetail'),
-        meta: { title: '培养方案详情', icon: 'form' }
+        meta: { title: '培养方案详情', icon: '' }
       }
     ]
   },
@@ -107,12 +107,21 @@ export const constantRoutes = [
     path: '/educateDirection',
     component: Layout,
     redirect: '/educateDirection',
-    children: [{
-      path: 'educateDirection',
-      name: 'EducateDirection',
-      component: () => import('@/views/educateDirection/index'),
-      meta: { title: '培养方向', icon: 'nested' }
-    }]
+    children: [
+      {
+        path: 'educateDirection',
+        name: 'EducateDirection',
+        component: () => import('@/views/educateDirection/index'),
+        meta: { title: '培养方向', icon: 'tree' }
+      },
+      {
+        path: 'directionOverview',
+        name: 'DirectionOverview',
+        hidden: true,
+        component: () => import('@/views/educateDirection/directionOverview'),
+        meta: { title: '流程介绍', icon: '' }
+      }
+    ]
   },
 
   {
@@ -123,7 +132,7 @@ export const constantRoutes = [
       path: 'graduationDirection',
       name: 'GraduationDirection',
       component: () => import('@/views/graduationDirection/index'),
-      meta: { title: '职业规划', icon: 'tree' }
+      meta: { title: '职业规划', icon: 'nested' }
     }]
   },
 
@@ -135,7 +144,7 @@ export const constantRoutes = [
       path: 'customerService',
       name: 'CustomerService',
       component: () => import('@/views/customerService/index'),
-      meta: { title: '智能客服', icon: 'user' }
+      meta: { title: '智能客服', icon: 'peoples' }
     }]
   },
 
