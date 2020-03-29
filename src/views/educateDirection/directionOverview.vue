@@ -1,22 +1,10 @@
 <template>
   <div class="container">
-    <div v-for="(item, index) in list" :key="index">
+    <div v-for="(e, index) in data.children" :key="index">
       <el-card class="box-card">
         <div slot="header" class="clearfix">
-          <span>{{item.name}}</span>
-          <el-button style="float: right; padding: 3px 0" type="text" @click="viewDetail(item.train_direction_id)">显示详情</el-button>
-        </div>
-        <div class="text item">
-          {{item.describe}}
-        </div>
-      </el-card>
-    </div>
-    <!-- <el-divider></el-divider> -->
-    <div v-for="(e, index) in data.children" :key="index">
-      <el-card class="">
-        <div slot="header" class="clearfix">
           <span>{{e.subitem}}</span>
-          <!-- <el-button style="float: right; padding: 3px 0" type="text" @click="viewDetail(item.train_direction_id)">查看详情</el-button> -->
+          <el-button style="float: right; padding: 3px 0" type="text" @click="viewDetail(item.train_direction_id)">查看详情</el-button>
         </div>
         <div class="text item">
           {{e.subitemDetail}}
@@ -30,23 +18,7 @@
 export default {
   data() {
     return {
-      list: [
-        {
-          name: '信息系统开发方向',
-          describe: '“信息系统开发”方向侧重培养学生利用信息系统解决管理中的实际问题以及信息系统开发建设的能力。',
-          train_direction_id: 1
-        },
-        {
-          name: '企业信息化方向',
-          describe: '“企业信息化”方向侧重培养学生的组织信息系统战略规划、分析与设计和组织信息化管理咨询等方面能力。',
-          train_direction_id: 2
-        },
-        {
-          name: '财经大数据分析方向',
-          describe: '“财经大数据分析”方向侧重培养学生的财经大数据采集、存储处理以及分析利用能力。',
-          train_direction_id: 3
-        }
-      ],
+      id: '',
       overView: [
         {
           id: 1,
@@ -109,47 +81,27 @@ export default {
           ]
         },
       ],
-      data: ''
+      data: '',
     }
   },
-  methods: {
-    viewDetail(id) {
-      // this.$router.push({ path: '/educateDirection/directionOverview', query: { train_direction_id: train_direction_id }})
-      this.data = this.overView[id - 1];
-    }
-  }
+  created() {
+    this.id = this.$route.query.train_direction_id;
+    this.data = this.overView[this.id - 1];
+  },
+  methods: {}
 }
 </script>
 
-<style>
-  .container {
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: center;
-  }
-  .text {
-    font-size: 14px;
-    line-height: 25px;
-  }
+<style lang="scss" scoped>
 
-  .item {
-    margin-bottom: 18px;
-  }
+.todo {
+  background: #4A9FF9;
+}
+.working {
+  background: #f5f2f0;
+}
+.done {
+  background: #67C23A;
+}
 
-  .clearfix:before,
-  .clearfix:after {
-    display: table;
-    content: "";
-  }
-  .clearfix:after {
-    clear: both
-  }
-
-  .box-card {
-    width: 280px;
-    margin: 30px;
-    background: pink;
-    color: white;
-  }
 </style>
-

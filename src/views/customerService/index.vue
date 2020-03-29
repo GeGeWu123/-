@@ -39,7 +39,7 @@ export default {
       		content:'Hello，这里是山东财经大学信管专业咨询系统,我是您的专属客服',
       		date: new Date()
       	},{
-      		content:'有什么想问的可以随时咨询我哦~',
+      		content:'有什么想问的可以回复关键字咨询我哦，比如核心课程、修业年限、考研方向~',
       		date:new Date()
       	}]
       },
@@ -78,12 +78,13 @@ export default {
           date: new Date(),
           self:true
         })
-        robotRequest(this.content).then(res => {
+        var temp = this.content;
+        this.content = '';
+        robotRequest(temp).then(res => {
           this.sessions.messages.push({
             content: res.data,
             date: new Date(),
           })
-          this.content = '';
         })
 
       }
@@ -168,7 +169,7 @@ export default {
     bottom: 0;
     right: 0;
     width: 100%;
-    height: 30%;
+    height: 20%;
     border-top: solid 1px #DDD;
     > textarea {
       padding: 10px;
