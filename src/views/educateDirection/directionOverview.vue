@@ -1,15 +1,16 @@
 <template>
-  <div class="container">
-    <div v-for="(e, index) in data.children" :key="index">
-      <el-card class="box-card">
-        <div slot="header" class="clearfix">
-          <span>{{e.subitem}}</span>
-          <el-button style="float: right; padding: 3px 0" type="text" @click="viewDetail(item.train_direction_id)">查看详情</el-button>
+  <div>
+    <div class="news-box">
+      <div class="news_list w1080 middle">
+        <div class="news_list_item justify" v-for="(e, index) in directionData.children" :key="index" @click="toDetail(e)">
+          <div class="item_intro inline">
+            <div class="item_title f20 c3 pointer" @click="toDetail(e)">{{e.subitem}}</div>
+            <div class="item_info f14 c9 pointer" @click="toDetail(e)">{{e.subitemDetail}}</div>
+            <!-- <div class="item_info f14 c9 pointer" v-for="m in e.subitemDetail" @click="toDetail(m)">{{m}}</div> -->
+            <div class="readAll float-right clearfix f12 pointer" @click="toDetail(e)">查看岗位</div>
+          </div>
         </div>
-        <div class="text item">
-          {{e.subitemDetail}}
-        </div>
-      </el-card>
+      </div>
     </div>
   </div>
 </template>
@@ -26,23 +27,23 @@ export default {
           children: [
             {
               subitem: '系统规划与需求分析',
-              subitemDetail: '（1）提出系统开发的要求。业务需求初步调研，调查分析用户的总体需求，了解新系统应达到的总体目标。（2）制定项目开发计划。（3）分析信息系统目标，确定信息系统项目边界，完成项目范围定义和项目内容分解。（4）可行性分析。业务需求详细调研，调查系统应达到的功能目标；调查系统应用环境的现状；调查系统用户的人员状况；管理人员、技术人员、用户群数量。'
+              subitemDetail: ['提出系统开发的要求。业务需求初步调研，调查分析用户的总体需求，了解新系统应达到的总体目标', '制定项目开发计划', '分析信息系统目标，确定信息系统项目边界，完成项目范围定义和项目内容分解', '可行性分析。业务需求详细调研，调查系统应达到的功能目标；调查系统应用环境的现状；调查系统用户的人员状况；管理人员、技术人员、用户群数量']
             },
             {
               subitem: '系统设计',
-              subitemDetail: '（1）业务流程设计。（2）系统功能设计，划分子系统和功能模块，设计详细功能。（3）系统数据结构设计，建立完整数据字典。'
+              subitemDetail: ['业务流程设计', '系统功能设计，划分子系统和功能模块，设计详细功能', '系统数据结构设计，建立完整数据字典']
             },
             {
               subitem: '系统开发',
-              subitemDetail: '（1）程序设计和编写。（2）系统调试，据系统说明书和系统实施方案，对程序设计的结果进行全面的检查，找出并纠正其中的错误，把错误尽量消灭在系统正式运行以前。（3）编写系统使用说明书，包括系统运行环境的介绍、应用系统的介绍、操作说明、系统输出报表的相关说明、系统管理与维护说明等'
+              subitemDetail: ['程序设计和编写', '系统调试，据系统说明书和系统实施方案', '对程序设计的结果进行全面的检查，找出并纠正其中的错误，把错误尽量消灭在系统正式运行以前', '编写系统使用说明书，包括系统运行环境的介绍、应用系统的介绍、操作说明、系统输出报表的相关说明、系统管理与维护说明等']
             },
             {
               subitem: '系统测试',
-              subitemDetail: '任务包括计算机等硬件设备的购置、安装和调试，应用程序的编制和调试，人员培训，数据文件转换，系统调试与转换等。'
+              subitemDetail: ['任务包括计算机等硬件设备的购置、安装和调试，应用程序的编制和调试，人员培训，数据文件转换，系统调试与转换等']
             },
             {
               subitem: '系统运行维护',
-              subitemDetail: '（1）系统正式运行（2）随着业务需求和流程的改变，对系统进行维护和修改（3）记录系统在上线后出现的问题，将问题专业化并产生问题反馈记录提交到相关的部门。'
+              subitemDetail: ['系统正式运行', '随着业务需求和流程的改变，对系统进行维护和修改', '记录系统在上线后出现的问题，将问题专业化并产生问题反馈记录提交到相关的部门']
             },
           ]
 
@@ -81,19 +82,20 @@ export default {
           ]
         },
       ],
-      data: '',
+      directionData: '',
     }
   },
   created() {
     this.id = this.$route.query.train_direction_id;
-    this.data = this.overView[this.id - 1];
+    this.directionData = this.overView[this.id - 1];
+    this.getDeriction();
   },
-  methods: {}
+  methods: {
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-
 .todo {
   background: #4A9FF9;
 }
@@ -104,4 +106,125 @@ export default {
   background: #67C23A;
 }
 
+.clearfix {
+  &:after, &:before {
+    display: block;
+    content: " ";
+    clear: both;
+  }
+}
+.float-right {
+  float: right;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.f20 {
+  font-size: 20px;
+  font-family: PingFangSC-Regular, sans-serif;
+}
+.f14 {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, sans-serif;
+}
+.f12 {
+  font-size: 12px;
+  font-family: PingFangSC-Regular, sans-serif;
+}
+.c3 {
+  color: #333;
+}
+
+.c6 {
+  color: #666;
+}
+
+.c9 {
+  color: #999;
+}
+.middle {
+  margin: 0 auto;
+  height: 100%;
+}
+
+.w1080 {
+  width: 1200px;
+  padding: 0 60px;
+}
+.justify {
+  text-align: justify;
+  &::after {
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    content: '';
+    vertical-align: top;
+  }
+}
+
+.inline {
+  display: inline-block;
+  vertical-align: text-top;
+}
+.news-box {
+  // height: 1246px;
+  padding: 51px 0px 100px;
+  .news_list {
+    .news_list_item {
+      height: 195px;
+      width: 83%;
+      padding: 43px 20px;
+      box-sizing: border-box;
+      // border: 1px #dcdcdc solid;
+      margin-bottom: 30px;
+      &:hover {
+        box-shadow: 0px 6px 12.2px .8px rgba($color: #b2b2b2, $alpha: 0.3);
+      }
+      .item_img {
+        width: 130px;
+        height: 130px;
+        position: relative;
+        img {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+          width: 100%;
+          height: 100%;
+          border-radius: 50%
+        }
+      }
+      .item_intro {
+        width: 84%;
+        .item_title {
+          line-height: 40px;
+          // &:hover {
+          //   color: $mianColor;
+          // }
+        }
+        .item_info {
+          line-height: 24px;
+        }
+      }
+      .readAll {
+        width: 60px;
+        height: 23px;
+        // line-height: 24px;
+        padding: 3px 0px;
+        color: #409EFF;
+        text-align: center;
+        box-sizing: border-box;
+        border: #409EFF 1px solid;
+        border-radius: 4px;
+        &:hover {
+          color: #fff;
+          background: #409EFF;
+        }
+      }
+    }
+  }
+}
 </style>

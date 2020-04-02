@@ -1,52 +1,28 @@
 <template>
-  <div class="container">
-    <div v-for="(item, index) in list" :key="index">
-      <el-card class="box-card">
-        <div slot="header" class="clearfix">
-          <span>{{item.name}}</span>
-          <el-button style="float: right; padding: 3px 0" type="text" @click="viewDetail(item.train_direction_id)">显示详情</el-button>
+  <div>
+    <div class="news-box">
+      <div class="news_list w1080 middle">
+        <div class="news_list_item justify" v-for="(item, index) in derictionList" :key="index" @click="toDetail(item)">
+          <div class="item_img inline" @click="toDetail(item)">
+            <img src="@/assets/bigData.jpg" alt="">
+          </div>
+          <div class="item_intro inline">
+            <div class="item_title f20 c3 pointer" @click="toDetail(item)">{{item.name}}</div>
+            <div class="item_info f14 c9 pointer" @click="toDetail(item)">{{item.describe}}</div>
+            <div class="readAll float-right clearfix f12 pointer" @click="toDetail(item)">流程介绍</div>
+          </div>
         </div>
-        <div class="text item">
-          {{item.describe}}
-        </div>
-      </el-card>
-    </div>
-    <!-- <el-divider></el-divider> -->
-    <div v-for="(e, index) in data.children" :key="index">
-      <el-card class="">
-        <div slot="header" class="clearfix">
-          <span>{{e.subitem}}</span>
-          <!-- <el-button style="float: right; padding: 3px 0" type="text" @click="viewDetail(item.train_direction_id)">查看详情</el-button> -->
-        </div>
-        <div class="text item">
-          {{e.subitemDetail}}
-        </div>
-      </el-card>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { getEducateDirection } from '@/api/educateDirection'
 export default {
   data() {
     return {
-      list: [
-        {
-          name: '信息系统开发方向',
-          describe: '“信息系统开发”方向侧重培养学生利用信息系统解决管理中的实际问题以及信息系统开发建设的能力。',
-          train_direction_id: 1
-        },
-        {
-          name: '企业信息化方向',
-          describe: '“企业信息化”方向侧重培养学生的组织信息系统战略规划、分析与设计和组织信息化管理咨询等方面能力。',
-          train_direction_id: 2
-        },
-        {
-          name: '财经大数据分析方向',
-          describe: '“财经大数据分析”方向侧重培养学生的财经大数据采集、存储处理以及分析利用能力。',
-          train_direction_id: 3
-        }
-      ],
+      derictionList: [],
       overView: [
         {
           id: 1,
@@ -112,44 +88,157 @@ export default {
       data: ''
     }
   },
+  created() {
+    this.getDeriction();
+  },
   methods: {
     viewDetail(id) {
       // this.$router.push({ path: '/educateDirection/directionOverview', query: { train_direction_id: train_direction_id }})
       this.data = this.overView[id - 1];
+    },
+    getDeriction() {
+      getEducateDirection().then(res => {
+        var temp = res.data;
+        this.derictionList = [];
+        temp.forEach(item => {
+          this.derictionList.push({
+            name: item.trainDirectionName,
+            describe: item.trainDirectionContent,
+            train_direction_id: item.keyId,
+          })
+        });
+        console.log(res.data)
+      })
+    },
+    toDetail(item) {
+      console.log(item)
+      this.$router.push({path: '/educateDirection/directionOverview', query: { train_direction_id: item.train_direction_id }})
     }
   }
 }
 </script>
 
-<style>
-  .container {
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: center;
+<style lang="scss">
+.clearfix {
+  &:after, &:before {
+    display: block;
+    content: " ";
+    clear: both;
   }
-  .text {
-    font-size: 14px;
-    line-height: 25px;
-  }
+}
+.float-right {
+  float: right;
+}
 
-  .item {
-    margin-bottom: 18px;
-  }
+.pointer {
+  cursor: pointer;
+}
 
-  .clearfix:before,
-  .clearfix:after {
-    display: table;
-    content: "";
-  }
-  .clearfix:after {
-    clear: both
-  }
+.f20 {
+  font-size: 20px;
+  font-family: PingFangSC-Regular, sans-serif;
+}
+.f14 {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, sans-serif;
+}
+.f12 {
+  font-size: 12px;
+  font-family: PingFangSC-Regular, sans-serif;
+}
+.c3 {
+  color: #333;
+}
 
-  .box-card {
-    width: 280px;
-    margin: 30px;
-    background: pink;
-    color: white;
+.c6 {
+  color: #666;
+}
+
+.c9 {
+  color: #999;
+}
+.middle {
+  margin: 0 auto;
+  height: 100%;
+}
+
+.w1080 {
+  width: 1200px;
+  padding: 0 60px;
+}
+.justify {
+  text-align: justify;
+  &::after {
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    content: '';
+    vertical-align: top;
   }
+}
+
+.inline {
+  display: inline-block;
+  vertical-align: text-top;
+}
+.news-box {
+  // height: 1246px;
+  padding: 51px 0px 100px;
+  .news_list {
+    .news_list_item {
+      height: 195px;
+      width: 83%;
+      padding: 43px 20px;
+      box-sizing: border-box;
+      border: 1px #dcdcdc solid;
+      margin-bottom: 30px;
+      &:hover {
+        box-shadow: 0px 6px 12.2px .8px rgba($color: #b2b2b2, $alpha: 0.3);
+      }
+      .item_img {
+        width: 130px;
+        height: 130px;
+        position: relative;
+        img {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+          width: 100%;
+          height: 100%;
+          border-radius: 50%
+        }
+      }
+      .item_intro {
+        width: 84%;
+        .item_title {
+          line-height: 40px;
+          // &:hover {
+          //   color: $mianColor;
+          // }
+        }
+        .item_info {
+          line-height: 24px;
+        }
+      }
+      .readAll {
+        width: 60px;
+        height: 23px;
+        // line-height: 24px;
+        padding: 3px 0px;
+        color: #409EFF;
+        text-align: center;
+        box-sizing: border-box;
+        border: #409EFF 1px solid;
+        border-radius: 4px;
+        &:hover {
+          color: #fff;
+          background: #409EFF;
+        }
+      }
+    }
+  }
+}
 </style>
 
