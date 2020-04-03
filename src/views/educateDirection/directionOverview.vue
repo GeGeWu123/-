@@ -7,7 +7,7 @@
             <div class="item_title f20 c3 pointer" @click="toDetail(e)">{{e.subitem}}</div>
             <ul type="none" v-for="(m,index) in e.subitemDetail" :key="index">
               <li class="row">
-                <div :style="randomRgb(item)" class="circle auto"></div>
+                <div :style="randomRgb()" class="circle auto"></div>
                 <div class="item_info f14 c9 pointer">{{m}}</div>
               </li>
             </ul>
@@ -96,7 +96,7 @@ export default {
     console.log(this.directionData, 'directionData');
   },
   methods: {
-    randomRgb(item) {
+    randomRgb() {
       let R = Math.floor(Math.random() * 130+110);
       let G = Math.floor(Math.random() * 130+110);
       let B = Math.floor(Math.random() * 130+110);

@@ -2,17 +2,17 @@
   <div class="table">
     <el-table
       :data="planData"
-      border
+      stripe
       style="width: 100%">
       <el-table-column
         prop="grade"
         label="年级"
-        width="180">
+        width="">
       </el-table-column>
       <el-table-column
         prop="updateTime"
         label="更新时间"
-        width="180">
+        width="">
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
@@ -53,6 +53,6 @@ export default {
 
 <style lang="scss">
 .table{
-    margin: 111px 300px;
+    margin: 10px 10px;
 }
 </style>
