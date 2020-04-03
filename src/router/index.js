@@ -120,6 +120,13 @@ export const constantRoutes = [
         hidden: true,
         component: () => import('@/views/educateDirection/directionOverview'),
         meta: { title: '流程介绍', icon: '' }
+      },
+      {
+        path: 'viewJob',
+        name: 'ViewJob',
+        hidden: true,
+        component: () => import('@/views/educateDirection/viewJob'),
+        meta: { title: '相关岗位', icon: '' }
       }
     ]
   },
