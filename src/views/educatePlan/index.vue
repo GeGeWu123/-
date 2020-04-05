@@ -6,7 +6,7 @@
       style="width: 100%">
       <el-table-column
         prop="grade"
-        label="年级"
+        label="版本"
         width="">
       </el-table-column>
       <el-table-column

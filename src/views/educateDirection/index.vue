@@ -4,11 +4,11 @@
       <div class="news_list w1080 middle">
         <div class="news_list_item justify" v-for="(item, index) in derictionList" :key="index" @click="toDetail(item)">
           <div class="item_img inline" @click="toDetail(item)">
-            <img src="@/assets/bigData.jpg" alt="">
+            <img :src="item.picture" alt="">
           </div>
           <div class="item_intro inline">
-            <div class="item_title f20 c3 pointer" @click="toDetail(item)">{{item.name}}</div>
-            <div class="item_info f14 c9 pointer" @click="toDetail(item)">{{item.describe}}</div>
+            <div class="item_title f20 c3 pointer" @click="toDetail(item)">{{item.trainDirectionName}}</div>
+            <div class="item_info f14 c9 pointer" @click="toDetail(item)">{{item.trainDirectionContent}}</div>
             <div class="readAll float-right clearfix f12 pointer" @click="toDetail(item)">流程介绍</div>
           </div>
         </div>
@@ -23,34 +23,22 @@ export default {
   data() {
     return {
       derictionList: [],
-      data: ''
     }
   },
   created() {
     this.getDeriction();
   },
   methods: {
-    viewDetail(id) {
-      // this.$router.push({ path: '/educateDirection/directionOverview', query: { train_direction_id: train_direction_id }})
-      this.data = this.overView[id - 1];
-    },
     getDeriction() {
       getEducateDirection().then(res => {
         var temp = res.data;
-        this.derictionList = [];
-        temp.forEach(item => {
-          this.derictionList.push({
-            name: item.trainDirectionName,
-            describe: item.trainDirectionContent,
-            train_direction_id: item.keyId,
-          })
-        });
+        this.derictionList = temp;
         console.log(res.data)
       })
     },
     toDetail(item) {
       console.log(item)
-      this.$router.push({path: '/educateDirection/directionOverview', query: { train_direction_id: item.train_direction_id }})
+      this.$router.push({path: '/educateDirection/directionOverview', query: { train_direction_id: item.keyId }})
     }
   }
 }

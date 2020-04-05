@@ -14,7 +14,6 @@ export default {
 <style>
 .temp{
     height: 90px;
-    width: 100%;
-    margin-left: 94px;
+    width: 104%;
 }
 </style>
