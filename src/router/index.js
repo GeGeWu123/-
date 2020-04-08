@@ -115,10 +115,10 @@ export const constantRoutes = [
         meta: { title: '培养方向', icon: 'tree' }
       },
       {
-        path: 'directionOverview',
-        name: 'DirectionOverview',
+        path: 'process',
+        name: 'process',
         hidden: true,
-        component: () => import('@/views/educateDirection/directionOverview'),
+        component: () => import('@/views/educateDirection/process'),
         meta: { title: '流程介绍', icon: '' }
       },
       {

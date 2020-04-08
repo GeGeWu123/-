@@ -38,7 +38,7 @@ export default {
     },
     toDetail(item) {
       console.log(item)
-      this.$router.push({path: '/educateDirection/directionOverview', query: { train_direction_id: item.keyId }})
+      this.$router.push({path: '/educateDirection/process', query: { train_direction_id: item.keyId }})
     }
   }
 }

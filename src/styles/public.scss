@@ -1,15 +1,14 @@
-.todo {
-  background: #4A9FF9;
-}
-.working {
-  background: #f5f2f0;
-}
-.done {
-  background: #67C23A;
+.plain {
+  color: #409EFF;
+  background: #ecf5ff;
+  border-color: #b3d8ff;
 }
 .row{
   display: flex;
   flex-direction: row;
+}
+.center{
+  text-align: center;
 }
 .wrap {
   flex-wrap: wrap;
@@ -103,3 +102,12 @@
   display: inline-block;
   vertical-align: text-top;
 }
+
+.m15{
+  margin: 15px;
+}
+
+.m30{
+  margin: 30px;
+}
+
