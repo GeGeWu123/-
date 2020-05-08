@@ -34,9 +34,6 @@ export default {
               }
             ]
           },
-          {
-            name: '创业'
-          }
         ]
       }]
     }

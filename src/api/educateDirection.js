@@ -17,3 +17,12 @@ export function getProcess(id) {
     headers: { 'Content-Type': 'application/json' }
   })
 }
+
+// 根据流程id查询相关岗位
+export function queryJob(id) {
+  return request({
+    url: '/query/job' + '?flowId=' + id,
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' }
+  })
+}

@@ -64,20 +64,12 @@ export const constantRoutes = [
     path: '/CourseSystem',
     component: Layout,
     redirect: '/courseSystem/oneSix',
-    name: 'CourseSystem',
-    meta: { title: '课程体系（待）', icon: 'example' },
     children: [
       {
-        path: 'oneSix',
-        name: 'OneSix',
-        component: () => import('@/views/oneSix/index'),
-        meta: { title: '一六级', icon: 'table' }
-      },
-      {
-        path: 'oneSeven',
-        name: 'OneSeven',
-        component: () => import('@/views/oneSeven/index'),
-        meta: { title: '一七级', icon: 'tree' }
+        path: 'courseSystem',
+        name: 'CourseSystem',
+        component: () => import('@/views/courseSystem/index'),
+        meta: { title: '课程体系', icon: 'table' }
       }
     ]
   },
