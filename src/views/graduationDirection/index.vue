@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div id="treeChart" :style="{width: '800px', height: '500px', padding: '30px'}"></div>
+  <div class="bcg">
+    <div id="treeChart" :style="{width: '1000px', height: '650px', padding: '30px'}"></div>
   </div>
 </template>
 
@@ -13,27 +13,73 @@ export default {
         name: '本科发展方向',
         children: [
           {
-            name: '考研',
-          },
-          {
-            name: '就业',
+            name: '深造学习',
             children: [
               {
-                name: '相关就业详见菜单栏‘培养方向’'
+                name: '研究生',
+                children: [
+                  {
+                    name: '国内读研',
+                    children: [
+                      {
+                        name:'考研方向',
+                        children: [
+                          {
+                            name: '管理科学与工程'
+                          },
+                          {
+                            name: '工商管理'
+                          },
+                          {
+                            name: '公共管理'
+                          },
+                          {
+                            name: '情报学'
+                          }
+                        ]
+                      },
+                      {
+                        name:'能力要求',
+                      }
+                    ]
+                  },
+                  {
+                    name: '国外读研',
+                    children: [
+                      {
+                        name: '申请流程'
+                      },
+                      {
+                        name: '能力要求'
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           },
           {
-            name: '考公'
-          },
-          {
-            name: '留学',
+            name: '直接就业',
             children: [
               {
-                name: '相关文件（申请流程、交换要求）'
+                name: '就业方向',
+                children: [
+                  {
+                    name: '企业信息化方向'
+                  },
+                  {
+                    name: '信息系统开发方向'
+                  },
+                  {
+                    name: '财经大数据分析方向'
+                  }
+                ]
+              },
+              {
+                name: '职业资格认证'
               }
             ]
-          },
+          }
         ]
       }]
     }
@@ -95,10 +141,7 @@ export default {
 </script>
 
 <style>
-.ml30{
-  margin-left: 30px;
-}
-.m50{
-  margin: 50px
+.bcg{
+  background: aliceblue;
 }
 </style>

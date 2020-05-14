@@ -52,12 +52,21 @@ export const constantRoutes = [
     path: '/video',
     component: Layout,
     redirect: '/video',
-    children: [{
-      path: 'myvideo',
-      name: 'Video',
-      component: () => import('@/views/video/index'),
-      meta: { title: '导学视频', icon: 'guide' }
-    }]
+    children: [
+      {
+        path: 'myvideo',
+        name: 'Video',
+        component: () => import('@/views/video/index'),
+        meta: { title: '导学视频', icon: 'guide' }
+      },
+      {
+        path: 'videoDetail',
+        name: 'VideoDetail',
+        hidden: true,
+        component: () => import('@/views/video/videoDetail'),
+        meta: { title: '播放导学视频', icon: '' }
+      }
+    ]
   },
 
   {
@@ -131,7 +140,7 @@ export const constantRoutes = [
       path: 'graduationDirection',
       name: 'GraduationDirection',
       component: () => import('@/views/graduationDirection/index'),
-      meta: { title: '职业规划', icon: 'nested' }
+      meta: { title: '毕业去向', icon: 'nested' }
     }]
   },
 

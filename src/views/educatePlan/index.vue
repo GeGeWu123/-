@@ -5,8 +5,13 @@
       stripe
       style="width: 100%">
       <el-table-column
-        prop="grade"
+        prop="version"
         label="版本"
+        width="">
+      </el-table-column>
+      <el-table-column
+        prop="grade"
+        label="适用年级"
         width="">
       </el-table-column>
       <el-table-column
