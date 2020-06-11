@@ -3,9 +3,11 @@
     <div id="message" v-scroll-bottom="sessions">
       <ul v-if="currentSessionId==sessions.id">
         <li v-for="(entry,index2) in sessions.messages" :key="index2">
+          <!-- 时间 -->
           <p class="time">
             <span>{{ entry.date | time }}</span>
           </p>
+          <!-- 动态头像 -->
           <div class="main" :class="{self:entry.self}">
             <img class="avatar" :src="entry.self ? img : sessions.user.img" alt="">
             <p class="text">{{ entry.content }}</p>

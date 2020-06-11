@@ -9,7 +9,7 @@
           <div class="item_intro inline">
             <div class="item_title f20 c3 pointer" @click="toDetail(item)">{{item.trainDirectionName}}</div>
             <div class="item_info f14 c9 pointer" @click="toDetail(item)">{{item.trainDirectionContent}}</div>
-            <div class="readAll float-right clearfix f12 pointer" @click="toDetail(item)">流程介绍</div>
+            <div class="readAll float-right clearfix f12 pointer" @click="toDetail(item)">职业规划</div>
           </div>
         </div>
       </div>
